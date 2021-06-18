@@ -105,6 +105,7 @@ static void SetDotProduct(DotProductFunction f, const IntSimdMatrix *m = nullptr
 // Constructor.
 // Tests the architecture in a system-dependent way to detect AVX, SSE and
 // any other available SIMD equipment.
+// TODO: delete register type check - leave only dot-product function that optimized for target register type of system
 // __GNUC__ is also defined by compilers that include GNU extensions such as
 // clang.
 SIMDDetect::SIMDDetect() {
