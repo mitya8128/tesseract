@@ -43,6 +43,7 @@ namespace tesseract {
 
 // Even though the limit on the number of chunks may now be removed, keep
 // the same limit for repeatable behavior, and it may be a speed advantage.
+// TODO: change kMaxNumChunks to smaller value
 static const int kMaxNumChunks = 64;
 
 /*----------------------------------------------------------------------
