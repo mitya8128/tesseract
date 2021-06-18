@@ -46,6 +46,8 @@ bool Wordrec::near_point(EDGEPT *point, EDGEPT *line_pt_0, EDGEPT *line_pt_1, ED
 
   if (x0 == x1) {
     /* Handle vertical line */
+    // TODO: change type conversion to another type (int_fast16_t)
+    // to do so i need to change types in TPOINT structure (blobs.h 50 line)
     p.x = static_cast<int16_t>(x0);
     p.y = point->pos.y;
   } else {
