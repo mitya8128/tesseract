@@ -1,8 +1,4 @@
 ## run autogen.sh to create Makefile.in from this file
-
-# Be less noisy by default. Can be overridden with `make V=1`.
-V = 0
-
 ACLOCAL_AMFLAGS = -I m4
 
 .PHONY: doc html install-langs ScrollView.jar install-jars pdf training
@@ -80,7 +76,7 @@ AM_CPPFLAGS += -I$(top_srcdir)/include
 AM_CPPFLAGS += -I$(top_builddir)/include
 if VISIBILITY
 AM_CPPFLAGS += -DTESS_EXPORTS
-AM_CPPFLAGS += -fvisibility=hidden -fvisibility-inlines-hidden
+AM_CPPFLAGS += -fvisibility=hidden -fvisibility-inlines-hidden -fPIC
 endif
 AM_CPPFLAGS += $(OPENCL_CPPFLAGS)
 
@@ -731,6 +727,9 @@ tesseract_CPPFLAGS += -I$(top_srcdir)/src/ccstruct
 tesseract_CPPFLAGS += -I$(top_srcdir)/src/ccutil
 tesseract_CPPFLAGS += -I$(top_srcdir)/src/dict
 tesseract_CPPFLAGS += -I$(top_srcdir)/src/viewer
+if OPENCL
+tesseract_CPPFLAGS += -I$(top_srcdir)/src/opencl
+endif
 tesseract_CPPFLAGS += $(AM_CPPFLAGS)
 if VISIBILITY
 tesseract_CPPFLAGS += -DTESS_IMPORTS

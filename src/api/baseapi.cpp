@@ -1282,6 +1282,7 @@ bool TessBaseAPI::ProcessPage(Pix *pix, int page_index, const char *filename,
     }
     output_filename += ".tif";
     pixWrite(output_filename.c_str(), page_pix, IFF_TIFF_G4);
+    pixDestroy(&page_pix);
   }
 
   if (failed && retry_config != nullptr && retry_config[0] != '\0') {
@@ -2071,7 +2072,7 @@ bool TessBaseAPI::Threshold(Pix **pix) {
       tesseract_->set_pix_grey(nullptr);
     }
   } else {
-    auto [ok, pix_grey, pix_binary, pix_thresholds] = thresholder_->Threshold(thresholding_method);
+    auto [ok, pix_grey, pix_binary, pix_thresholds] = thresholder_->Threshold(this, thresholding_method);
 
     if (!ok) {
       return false;

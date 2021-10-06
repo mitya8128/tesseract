@@ -29,7 +29,7 @@ AM_INIT_AUTOMAKE([foreign subdir-objects])
 # Define date of package, etc. Could be useful in auto-generated
 # documentation.
 PACKAGE_YEAR=2021
-PACKAGE_DATE="08/15"
+PACKAGE_DATE="09/16"
 
 abs_top_srcdir=`AS_DIRNAME([$0])`
 
@@ -74,6 +74,10 @@ AC_CONFIG_HEADERS([include/config_auto.h:config/config.h.in])
 AM_CONDITIONAL([T_WIN], false)
 AM_CONDITIONAL([GRAPHICS_DISABLED], false)
 AC_SUBST([AM_CPPFLAGS])
+
+# Be less noisy by default.
+# Can be overridden with `configure --disable-silent-rules` or with `make V=1`.
+AM_SILENT_RULES([yes])
 
 OPENCL_INC="/opt/AMDAPP/include"
 OPENCL_LIBS="-lOpenCL"
@@ -308,7 +312,7 @@ case "${host_os}" in
     MY_CHECK_FRAMEWORK([Accelerate])
     if test $my_cv_framework_Accelerate = yes; then
       AM_CPPFLAGS="-DHAVE_FRAMEWORK_ACCELERATE $AM_CPPFLAGS"
-      LDFLAGS="$LDFLAGS -framework Accelerate"
+      AM_LDFLAGS="$AM_LDFLAGS -framework Accelerate"
     fi
     MY_CHECK_FRAMEWORK([OpenCL])
     if test "$enable_opencl" = "yes"; then
